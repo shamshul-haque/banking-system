@@ -1,10 +1,15 @@
+// get submit button and and add event
 document.getElementById("btn-submit").addEventListener("click", function () {
+  // get email address
   const email = document.getElementById("user-email").value;
+
+  // get password
   const password = document.getElementById("user-password").value;
-  // Warning: We will verify user in server side.
+
+  // verify user
   if (email === "js.bank@gmail.com" && password === "secret") {
-    console.log("valid");
+    location.href = "dashboard.html";
   } else {
-    console.log("invalid");
+    alert("Invalid user and password");
   }
 });
