@@ -1,30 +1,49 @@
 // get deposit button and and add event
 document.getElementById("btn-deposit").addEventListener("click", function () {
   // get user input
-  const newDepositAmount = document.getElementById("deposit-field");
+  const newDepositAmount = parseFloat(
+    document.getElementById("deposit-field").value
+  );
 
-  // get previous total deposit
-  const previousTotalDeposit = document.getElementById("deposit-amount");
+  // validation for empty value
+  if (isNaN(newDepositAmount)) {
+    alert("Deposit amount can't be empty");
+    return;
+  }
 
-  // calculate new total deposit
-  const currentDepositTotal =
-    parseFloat(previousTotalDeposit.innerText) +
-    parseFloat(newDepositAmount.value);
-
-  // set current total deposit
-  previousTotalDeposit.innerText = currentDepositTotal.toFixed(2);
+  // validation for negative value
+  if (newDepositAmount <= 0) {
+    alert("You have to enter positive amount");
+    return;
+  }
 
   // get previous total balance
-  const previousTotalBalance = document.getElementById("balance-amount");
+  const previousTotalBalance = parseFloat(
+    document.getElementById("balance-amount").innerText
+  );
+
+  // get previous total deposit
+  const previousTotalDeposit = parseFloat(
+    document.getElementById("deposit-amount").innerText
+  );
+
+  // calculate new total deposit
+  const currentTotalDeposit = previousTotalDeposit + newDepositAmount;
+
+  // set current total deposit
+  document.getElementById("deposit-amount").innerText =
+    currentTotalDeposit.toFixed(2);
+  /* previousTotalDeposit.innerText = currentDepositTotal.toFixed(2); */
 
   // calculate current total balance
-  const currentTotalBalance =
-    parseFloat(previousTotalBalance.innerText) +
-    parseFloat(newDepositAmount.value);
+  const currentTotalBalance = previousTotalBalance + newDepositAmount;
 
-  // set current balance amount
-  previousTotalBalance.innerText = currentTotalBalance.toFixed(2);
+  // set current total balance
+  document.getElementById("balance-amount").innerText =
+    currentTotalBalance.toFixed(2);
+  /* previousTotalBalance.innerText = currentTotalBalance.toFixed(2); */
 
-  // refresh the user input given box
-  newDepositAmount.value = "";
+  // clear the user input given box
+  document.getElementById("deposit-field").value = "";
+  /* newDepositAmount = ""; */
 });
