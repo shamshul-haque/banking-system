@@ -9,7 +9,7 @@ function getInputValue(inputId) {
 
   // validation for empty and negative value
   if (isNaN(inputFieldValue) || inputFieldValue <= 0) {
-    alert("Deposit amount can't be empty or negative number");
+    alert("Please enter a positive amount");
     return 0;
   }
   return inputFieldValue;
