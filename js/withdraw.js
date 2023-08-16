@@ -1,4 +1,4 @@
-// get withdraw button and and add event
+/* // get withdraw button and and add event
 document.getElementById("btn-withdraw").addEventListener("click", function () {
   // get user input
   const newWithdrawField = document.getElementById("withdraw-field");
@@ -47,4 +47,35 @@ document.getElementById("btn-withdraw").addEventListener("click", function () {
 
   // set current total balance
   previousTotalBalance.innerText = currentTotalBalance.toFixed(2);
+}); */
+
+// optimized way by function call
+// get withdraw button and and add event
+document.getElementById("btn-withdraw").addEventListener("click", function () {
+  // get user input by call getInput function
+  const newWithdrawAmount = getInputValue("withdraw-field");
+
+  // get previous total withdraw
+  const previousTotalWithdraw = getPreviousValue("withdraw-amount");
+
+  // get previous total balance
+  const previousTotalBalance = getPreviousValue("balance-amount");
+
+  // validation for less balance amount
+  if (newWithdrawAmount > previousTotalBalance) {
+    alert("You don't have sufficient balance");
+    return;
+  }
+
+  // calculate current total withdraw
+  const currentTotalWithdraw = previousTotalWithdraw + newWithdrawAmount;
+
+  // calculate current total balance
+  const currentTotalBalance = previousTotalBalance - newWithdrawAmount;
+
+  // set current total withdraw
+  setCurrentValue("withdraw-amount", currentTotalWithdraw);
+
+  // set current total balance
+  setCurrentValue("balance-amount", currentTotalBalance);
 });

@@ -1,4 +1,4 @@
-// get deposit button and and add event
+/* // get deposit button and and add event
 document.getElementById("btn-deposit").addEventListener("click", function () {
   // get user input
   const newDepositField = document.getElementById("deposit-field");
@@ -41,4 +41,29 @@ document.getElementById("btn-deposit").addEventListener("click", function () {
 
   // set current total balance
   previousTotalBalance.innerText = currentTotalBalance.toFixed(2);
+}); */
+
+// optimized way by function call
+// get deposit button and and add event
+document.getElementById("btn-deposit").addEventListener("click", function () {
+  // get user input
+  const newDepositAmount = getInputValue("deposit-field");
+
+  // get previous total deposit
+  const previousTotalDeposit = getPreviousValue("deposit-amount");
+
+  // get previous total balance
+  const previousTotalBalance = getPreviousValue("balance-amount");
+
+  // calculate current total deposit
+  const currentTotalDeposit = previousTotalDeposit + newDepositAmount;
+
+  // calculate current total balance
+  const currentTotalBalance = previousTotalBalance + newDepositAmount;
+
+  // set current total deposit
+  setCurrentValue("deposit-amount", currentTotalDeposit);
+
+  // set current total balance
+  setCurrentValue("balance-amount", currentTotalBalance);
 });
