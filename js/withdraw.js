@@ -1,9 +1,12 @@
 // get withdraw button and and add event
 document.getElementById("btn-withdraw").addEventListener("click", function () {
   // get user input
-  const newWithdrawAmount = parseFloat(
-    document.getElementById("withdraw-field").value
-  );
+  const newWithdrawField = document.getElementById("withdraw-field");
+  const newWithdrawString = newWithdrawField.value;
+  const newWithdrawAmount = parseFloat(newWithdrawString);
+
+  // clear user input
+  newWithdrawField.value = "";
 
   // validation for empty value
   if (isNaN(newWithdrawAmount)) {
@@ -18,38 +21,30 @@ document.getElementById("btn-withdraw").addEventListener("click", function () {
   }
 
   // get previous total balance
-  const previousTotalBalance = parseFloat(
-    document.getElementById("balance-amount").innerText
-  );
+  const previousTotalBalance = document.getElementById("balance-amount");
+  const previousTotalString = previousTotalBalance.innerText;
+  const previousTotalAmount = parseFloat(previousTotalString);
 
   // validation for less balance amount
-  if (newWithdrawAmount > previousTotalBalance) {
+  if (newWithdrawAmount > previousTotalAmount) {
     alert("You don't have sufficient balance");
     return;
   }
 
   // get previous total withdraw
-  const previousTotalWithdraw = parseFloat(
-    document.getElementById("withdraw-amount").innerText
-  );
+  const previousTotalWithdraw = document.getElementById("withdraw-amount");
+  const previousWithdrawString = previousTotalWithdraw.innerText;
+  const previousWithdrawAmount = parseFloat(previousWithdrawString);
 
   // calculate new total withdraw
-  const currentWithdrawTotal = newWithdrawAmount + previousTotalWithdraw;
+  const currentTotalWithdraw = previousWithdrawAmount + newWithdrawAmount;
 
   // set current total withdraw
-  document.getElementById("withdraw-amount").innerText =
-    currentWithdrawTotal.toFixed(2);
-  /*  previousTotalWithdraw.innerText = currentWithdrawTotal.toFixed(2); */
+  previousTotalWithdraw.innerText = currentTotalWithdraw.toFixed(2);
 
   // calculate current total balance
-  const currentTotalBalance = previousTotalBalance - newWithdrawAmount;
+  const currentTotalBalance = previousTotalAmount - newWithdrawAmount;
 
   // set current total balance
-  document.getElementById("balance-amount").innerText =
-    currentTotalBalance.toFixed(2);
-  /*  previousTotalBalance.innerText = currentTotalBalance.toFixed(2); */
-
-  // clear the user input
-  document.getElementById("withdraw-field").value = "";
-  /* newWithdrawAmount = ""; */
+  previousTotalBalance.innerText = currentTotalBalance.toFixed(2);
 });
